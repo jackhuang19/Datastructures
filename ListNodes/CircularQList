@@ -1,0 +1,100 @@
+//Jiawei Huang, jhuang19@cmc.edu 
+
+import java.util.*;
+
+public class CircularQList extends QList{
+	
+	private class ListNode{
+		String data;
+		ListNode next;
+		int size;
+		
+	 	public ListNode(String data) {
+	 		this.data = data;
+	 		this.next = null;
+		}
+		
+	 	public ListNode(String data, ListNode next) {
+			this.data = data;
+			this.next = next;
+		 } 	
+	}
+	
+	String data;
+	ListNode next;
+	int size;
+	private ListNode front;
+	
+	//create an empty QList
+	public CircularQList(){
+		front = null;  
+		size = 0;
+	}
+	
+	//append word to the end of the qlist
+	@Override
+	public void add(String word) {
+		if (front == null) {
+			 // adding to an empty list
+			front = new ListNode(word);
+		} 
+		else {
+			// adding to the end of an existing list
+			ListNode current = front;
+			while (current.next != front) {
+				current = current.next;
+			}
+			current.next = new ListNode(data);
+		}
+		size++;
+	}
+	
+	//insert word to be at index i
+	@Override
+	public void add(int i, String word) {
+		if (i == 0) {
+			 // adding to an empty list
+			 front = new ListNode(word, front);
+		} 
+		else {
+			// inserting into an existing list
+			ListNode current = front;
+			for (int count = 0; count < i - 1; i++) {
+				current = current.next;
+			 }
+			current.next = new ListNode(word, front);
+		 }
+		size++;
+	}
+	
+	//word at index i
+	@Override
+	public String get(int i) {
+		ListNode current = front;
+		for (int count = 0; count < i; count++) {
+			current = current.next;
+		}
+		return current.data;
+	} 
+	
+	//number of words in the Qlist
+	@Override
+	public int count() {
+		return size;
+	}
+	
+	//the words in the qlist
+	@Override
+	public String toString() {
+		//begins on current
+		ListNode current = front;
+		String s = current.data;
+		current = current.next;
+		// current ends on front because of the circular nature
+		while (current != front) {
+			s = s + ", " + current.data;
+			current = current.next; // move to next node
+		} 
+		return s;
+	}
+}
