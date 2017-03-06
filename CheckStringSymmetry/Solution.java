@@ -1,6 +1,5 @@
 //Jiawei Jack Huang
 //jhuang19@cmc.edu
-//CS62
 
 import java.util.*;
 
