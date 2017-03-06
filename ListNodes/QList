@@ -1,0 +1,92 @@
+//Jiawei Huang, jhuang19@cmc.edu 
+
+import java.util.*;
+	
+public class QList {
+	
+	private class ListNode{
+		String data;
+		ListNode next;
+		int size;
+		
+	 	public ListNode(String data) {
+	 		this.data = data;
+	 		this.next = null;
+		}
+		
+	 	public ListNode(String data, ListNode next) {
+			this.data = data;
+			this.next = next;
+		 } 	
+	}
+	
+	String data;
+	ListNode next;
+	int size;
+	private ListNode front;
+	
+	//create an empty QList
+	public QList(){
+		front = null;  
+		size = 0;
+	}
+	
+	//append word to the end of the qlist
+	public void add(String word) {
+		if (front == null) {
+			 // adding to an empty list
+			front = new ListNode(word);
+		} 
+		else {
+			// adding to the end of an existing list
+			ListNode current = front;
+			while (current.next != null) {
+				current = current.next;
+			}
+			current.next = new ListNode(data);
+		}
+		size++;
+	}
+	
+	//insert word to be at index i
+	public void add(int i, String word) {
+		if (i == 0) {
+			 // adding to an empty list
+			 front = new ListNode(word, front);
+		} 
+		else {
+			// inserting into an existing list
+			ListNode current = front;
+			for (int count = 0; count < i - 1; i++) {
+				current = current.next;
+			 }
+			current.next = new ListNode( word, current.next);
+		 }
+		size++;
+	}
+	
+	//word at index i
+	public String get(int i) {
+		ListNode current = front;
+		for (int count = 0; count < i; count++) {
+			current = current.next;
+		}
+		return current.data;
+	} 
+	
+	//number of words in the Qlist
+	public int count() {
+		return size;
+	}
+	
+	//the words in the qlist
+	public String toString() {
+		ListNode current = front;
+		String s = " ";
+		while (current != null) {
+			s = s + ", " + current.data;
+			current = current.next; // move to next node
+		} 
+		return s;
+	}
+}
